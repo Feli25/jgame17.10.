@@ -1,10 +1,23 @@
-console.log("Hello");
-// Iteration 1
 function goToPage(link) {
-  //Goal hide all the divs, with data page, except right one
+  $('[data-page]').hide()
+  $('[data-page=' + link + ']').show()
+  $('li.nav-item').each(function(){
+    var href = $(this).find('a.nav-link').attr('href')
+    if (href === link) {
+      $(this).addClass('active')
+    }
+    else {
+      $(this).removeClass('active')
+    }
+  })
+  
 }
 //GoToMainPage
 goToPage("home")
 
-//Iteration 2: Listen for click events on a tags
-//Hint: event.preventDefault
+$('a').click(function(event){
+  event.preventDefault()
+  var href = $(this).attr('href')
+  goToPage(href)
+})
+
